@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+        p { text-indent: 25px; }
+
+        /* Подключение шрифта и базовые стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Контейнер для полей */
+        .container {
+            max-width: 1000px; /* Уменьшение максимальной ширины */
+            margin: 0 auto; /* Автоматические поля слева и справа */
+            padding: 40px; /* Увеличенные внутренние отступы */
+            background-color: #fff; /* Фон для содержания */
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Основное содержимое */
+        main {
+            padding: 20px 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Блок с изображением */
+        section img {
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Маркированный список преимуществ */
+        ul {
+            padding-left: 20px;
+        }
+
+        /* Таблица с блюдами */
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер для содержания сайта с увеличенными полями -->
+    <div class="container">
+        <!-- Шапка сайта -->
+        <header>
+            <h1>Vortex</h1>
+            <nav>
+                <ul>
+                    <li><a href="#gas">О ресторане</a></li>
+                    <li><a href="#menu">Меню</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Основное содержимое -->
+        <main>
+            <!-- Блок с информацией о компании -->
+            <section id= "gas">
+                <h2>О нашем ресторане</h2>
+                <p>"Vortex" - это ресторан, погружающий гостей в атмосферу космического путешествия. Интерьер выполнен в футуристическом стиле, с использованием светодиодной подсветки, имитирующей звездное небо. Каждый зал ресторана представляет собой отдельную планету с уникальным дизайном и гастрономическими открытиями.</p>
+                <img src="Htcnjhfy.png" alt="Компания" width="600">
+                <p>Мы предлагаем лучшие блюда с использованием свежих и качественных продуктов. Наша компания гордится своими клиентами и стремится предоставить лучшее обслуживание.</p>
+            </section>
+
+            <!-- Блок с преимуществами компании -->
+            <section>
+                <h2>Наши преимущества</h2>
+                <ul>
+                    <li>Уникальная космическая концепция, погружающая гостей в атмосферу космического путешествия</li>
+                    <li>Использование инновационных технологий в оформлении ресторана и подаче блюд</li>
+                    <li>Авторское меню, разработанное шеф-поварами, специализирующимися на молекулярной кухне</li>
+                    <li>Высокий уровень обслуживания и индивидуальный подход к каждому гостю</li>
+                </ul>
+            </section>
+
+            <!-- Блок с популярными блюдами -->
+            <section id = "menu">
+                <h2>Наши популярные блюда</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Название блюда</th>
+                            <th>Описание</th>
+                            <th>Цена</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Черная дыра</td>
+                            <td>Черный рис, морепродукты в сливочном соусе, овощи, сферификация</td>
+                            <td>1200₽</td>
+                        </tr>
+                        <tr>
+                            <td>Затмение</td>
+                            <td>Тартар из баранины, пюре из сельдерея, карамелизированный лук</td>
+                            <td>950₽</td>
+                        </tr>
+                        <tr>
+                            <td>Кометный ливень</td>
+                            <td>Овощной салат с фруктовым муссом, декорированный съедобными "кометами"</td>
+                            <td>700₽</td>
+                        </tr>
+                        <tr>
+                            <td>Космический бургер</td>
+                            <td>Бургер с черным булочкой, черный бифштекс, синяя капуста, сыр "Лунный эклипс"</td>
+                            <td>850₽</td>
+                        </tr>
+                        <tr>
+                            <td>Галактическое парфе</td>
+                            <td>Молекулярное парфе с космическими фруктами и ягодами</td>
+                            <td>550₽</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer id="contacts">
+            <p>Контактные данные:</p>
+            <p>Квиткина Ульяна 231-3211</p>
+            <p>Телефон: <a href="tel:+79991234567">+7 (920) 454-43-88</a></p>
+            <p>Email: <a href="mailto:info@example.com">marusam263@gmail.com</a></p>
+        </footer>
+    </div>
+</body>
+</html>
