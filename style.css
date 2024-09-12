@@ -1,0 +1,120 @@
+*{
+            box-sizing: border-box /*свойства width и height начинают включать в себя значения padding и border*/
+        }
+
+        p { text-indent: 25px; }
+
+
+        /* Подключение шрифта и базовые стили */
+        body { 
+            font-family: "Neucha", cursive; 
+            font-weight: 400; 
+            font-style: normal; 
+
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4; 
+
+            font-size: 16px; / Или другой желаемый размер, например, 18px, 20px /
+        }
+        
+        /* Контейнер для полей */
+        .container {
+            max-width: 1000px; /* Уменьшение максимальной ширины */
+            margin: 0 auto; /* Автоматические поля слева и справа */
+            padding: 40px; /* Увеличенные внутренние отступы */
+            background-color: #fff; /* Фон для содержания */
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+        /*убирает точки списка*/
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        /*ставит их в одну линию*/
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        /*приводит их к виду основного текста (не вид ссылок)*/
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            color: rgb(154, 66, 158);
+            text-decoration: none;
+        }
+
+        /* Основное содержимое */
+        main {
+            padding: 20px 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Блок с изображением */
+        section img {
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* Маркированный список преимуществ */
+        ul {
+            padding-left: 20px;
+        }
+
+        /* Таблица с блюдами */
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer a {
+            text-decoration: none;
+            font-family: "Neucha", cursive; 
+            font-size: 16px;
+            color: blue;
+        }
+
+        footer a:hover {
+            color: rgb(154, 66, 158);
+            text-decoration: underline;
+        }
