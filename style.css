@@ -118,3 +118,103 @@
             color: rgb(154, 66, 158);
             text-decoration: underline;
         }
+
+        /* Стили для меню заказов на дом*/
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    border-radius: 35px;
+    background-color: #fff;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+  }
+  
+  .menu-item:hover {
+    border: 2px solid tomato;
+  }
+  
+  .menu-item:hover button {
+    background-color: tomato;
+    color: #fff;
+  }
+  
+  /* Стили для изображения */
+section > div > div > img {
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    transition: transform 0.3s ease;
+  }
+  
+  section > div > div > img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Стили для цены */
+  section > div > div > p.price {
+    font-size: 1.1rem;
+    transition: font-size 0.3s ease;
+  }
+  
+  section > div > div > p.price:hover {
+    font-size: 1.2rem;
+  }
+  
+  /* Стили для названия блюда */
+  section > div > div > p.dish-name {
+    font-size: 1.1rem;
+    transition: font-size 0.3s ease;
+  }
+  
+  section > div > div > p.dish-name:hover {
+    font-size: 1.2rem;
+  }
+  
+  /* Стили для веса/объема */
+  section > div > div > p.weight {
+    color: #808080;
+    transition: color 0.3s ease;
+  }
+  
+  section > div > div > p.weight:hover {
+    color: #505050;
+  }
+  
+  
+  .menu-item button {
+    background-color: #f1eee9;
+    color: #333;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 1024px) {
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .menu-item {
+      padding: 20px 30px;
+    }
+  }
+
+  nav a.active {
+    color: tomato;
+  }
+  
