@@ -4,6 +4,11 @@
 
         p { text-indent: 25px; }
 
+          h1 {
+            text-align: center;
+          }
+
+
 
         /* Подключение шрифта и базовые стили */
         body { 
@@ -326,7 +331,7 @@ button {
     cursor: pointer;
 }
 
-button[type="reset"] {
+button[type="button"] {
     background-color: #f44336;
     color: white;
 }
@@ -334,4 +339,18 @@ button[type="reset"] {
 button[type="submit"] {
     background-color: #4caf50;
     color: white;
+}
+
+.filter-button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button.active {
+  background-color: #f44336;
+  color: white;
 }

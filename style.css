@@ -354,7 +354,7 @@ button {
     cursor: pointer;
 }
 
-button[type="reset"] {
+button[type="button"] {
     background-color: #f44336;
     color: white;
 }

@@ -10,9 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Контейнер для содержания сайта с увеличенными полями -->
     <div class="container">
-        <!-- Шапка сайта -->
         <header>
             <h1>Vortex</h1>
             <nav>
@@ -26,160 +24,116 @@
             </nav>
         </header>
 
-        <!-- Основное содержимое -->
         <main>
-            <section>
+            <section id="soups">
                 <h2>Супы</h2>
-                <div class="menu-grid">
-                  <div class="menu-item">
-                    <img src="soup1.jpg" alt="Суп 1">
-                    <p class="name">Солнечная вспышка</p>
-                    <p class="weight">300 мл</p>
-                    <p class="price">450 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="soup2.png" alt="Суп 2">
-                    <p class="name">Межзвездный бульон</p>
-                    <p class="weight">350 мл</p>
-                    <p class="price">480 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="soup3.png" alt="Суп 3">
-                    <p class="name">Туманность Ориона</p>
-                    <p class="weight">400 мл</p>
-                    <p class="price">500 ₽</p>
-                    <button>Добавить</button>
-                  </div>
+                <div class="filter-buttons">
+                    <button class="filter-button" data-kind="fish">Рыбный</button>
+                    <button class="filter-button" data-kind="meat">Мясной</button>
+                    <button class="filter-button" data-kind="vegetarian">Вегетарианский</button>
                 </div>
-              </section>
-          
-              <section>
+                <div class="menu-grid" id="soups-menu"></div>
+            </section>
+            
+            <section id="main">
                 <h2>Главные блюда</h2>
-                <div class="menu-grid">
-                  <div class="menu-item">
-                    <img src="main1.png" alt="Главное блюдо 1">
-                    <p class="name">Черная дыра</p>
-                    <p class="weight">200 г</p>
-                    <p class="price">1200 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="main2.png" alt="Главное блюдо 2">
-                    <p class="name">Космический бургер</p>
-                    <p class="weight">300 г</p>
-                    <p class="price">850 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="main3.png" alt="Главное блюдо 3">
-                    <p class="name">Галактическое парфе</p>
-                    <p class="weight">180 г</p>
-                    <p class="price">550 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                </div>
-              </section>
-          
-              <section>
-                <h2>Напитки</h2>
-                <div class="menu-grid">
-                  <div class="menu-item">
-                    <img src="drink1.png" alt="Напиток 1">
-                    <p class="name">Астральный эликсир</p>
-                    <p class="weight">500 мл</p>
-                    <p class="price">650 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="drink2.png" alt="Напиток 2">
-                    <p class="name">Кометный лимонад</p>
-                    <p class="weight">350 мл</p>
-                    <p class="price">350 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                  <div class="menu-item">
-                    <img src="drink3.png" alt="Напиток 3">
-                    <p class="name">Солнечный взрыв</p>
-                    <p class="weight">180 мл</p>
-                    <p class="price">400 ₽</p>
-                    <button>Добавить</button>
-                  </div>
-                </div>
-              </section>
-              <div class="container">
-                <form action="https://httpbin.org/post" method="POST">
-                    <!-- Блок с заказом клиента -->
-                    <div class="block client-order">
-                        <h2>Сделать заказ</h2>
-                        <div class="form-group">
-                            <label for="soup">Суп</label>
-                            <select id="soup" name="soup" required>
-                                <option value="no">Выберите суп</option>
-                                <option value="sonze">Солнечная вспышка</option>
-                                <option value="mef">Межзвездный бульон</option>
-                                <option value="tuman">Туманность Ориона</option>
-                            </select>
-                        </div>
-        
-                        <div class="form-group">
-                            <label for="main_course">Главное блюдо</label>
-                            <select id="main_course" name="main_course" required>
-                                <option value="no">Выберите главное блюдо</option>
-                                <option value="dira">Черная дыра</option>
-                                <option value="burger">Космический бургер</option>
-                                <option value="parfe">Галактическое парфе</option>
-                            </select>
-                        </div>
-        
-                        <div class="form-group">
-                            <label for="drink">Напиток</label>
-                            <select id="drink" name="drink" required>
-                                <option value="no">Выберите напиток</option>
-                                <option value="astral">Астральный эликсир</option>
-                                <option value="kometa">Кометный лимонад</option>
-                                <option value="vzriv">Солнечный взрыв</option>
-                            </select>
-                        </div>
-        
-                        <div class="form-group">
-                            <label for="comments">Комментарий</label>
-                            <textarea id="comments" name="comments" rows="4"></textarea>
-                        </div>
+                    <div class="filter-buttons">
+                        <button class="filter-button" data-kind="fish">Рыбный</button>
+                        <button class="filter-button" data-kind="meat">Мясной</button>
+                        <button class="filter-button" data-kind="vegetarian">Вегетарианский</button>
                     </div>
+                    <div class="menu-grid" id="main-menu">
+            </section>
+
+            <section id="drinks">
+                <h2>Напитки</h2>
+                <div class="filter-buttons">
+                    <button class="filter-button" data-kind="hot">Горячий</button>
+                    <button class="filter-button" data-kind="cold">Холодный</button>
+                </div>
+                <div class="menu-grid" id="drinks-menu"></div>
+            </section>
+
+            <section id="salat">
+                <h2>Салаты и стартеры</h2>
+                <div class="filter-buttons">
+                    <button class="filter-button" data-kind="fish">Рыбный</button>
+                    <button class="filter-button" data-kind="meat">Мясной</button>
+                    <button class="filter-button" data-kind="vegetarian">Вегетарианский</button>
+                </div>
+                <div class="menu-grid" id="salat-menu"></div>
+            </section>
+
+            <section id="desserts">
+                <h2>Десерты</h2>
+                <div class="filter-buttons">
+                    <button class="filter-button" data-kind="small">Маленькая порция</button>
+                    <button class="filter-button" data-kind="medium">Средняя порция</button>
+                    <button class="filter-button" data-kind="large">Большая порция</button>
+                </div>
+                <div class="menu-grid" id="desserts-menu"></div>
+            </section>
         
-                    <!-- Блок с данными клиента -->
-                    <div class="block client-data">
-                      <h2>Ваши данные</h2>
+        <div class="container">
+            <h1>Сделать заказ</h1>
+            <form action="https://httpbin.org/post" method="POST">
+                <div class="block client-order">
+                  <div id="order-summary"> 
+                    <h2>Ваш заказ</h2> 
+                    <p id="general-status2" style="display: block;">Ничего не выбрано</p>
+                    <div id="general-status" style="display: none;">
+                      <p><strong>Суп</strong></p>
+                      <p><span id="soup-order">Не выбрано</span></p> 
+                    <p><strong>Главное блюдо</strong></p>
+                    <p><span id="main-order">Не выбрано</span></p>
+                    <p><strong>Салаты и стартеры</strong></p>
+                    <p><span id="salat-order">Не выбрано</span></p> 
+                    <p><strong>Напиток</strong></p>
+                    <p><span id="drink-order">Не выбрано</span></p> 
+                    <p><strong>Десерты</strong></p>
+                    <p><span id="desserts-order">Не выбрано</span></p> 
+                    <p><strong>Общая сумма</strong></p>
+                    <p></strong> <span id="total-cost">0 ₽</span></p>
+                  </div>
+                </div>
+                
+                    
+                    <div class="form-group">
+                        <label for="comments">Комментарий</label>
+                        <textarea id="comments" name="comments" rows="4"></textarea>
+                    </div>
+                </div>
 
-                      <div class="form-group">
-                          <label for="name">Имя</label>
-                          <input type="text" id="name" name="name" required>
-                      </div>
+                <div class="block client-data">
+                    <h2>Ваши данные</h2>
 
-                      <div class="form-group">
-                          <label for="email">Email</label>
-                          <input type="email" id="email" name="email" required>
-                      </div>
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
 
-                      <div class="checkbox-container">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="checkbox-container">
                         <input type="checkbox" id="subscribe" name="subscribe" checked>
                         <label for="subscribe">Получать информацию о скидках и акциях</label>
-                      </div>
+                    </div>
 
-                      <div class="form-group">
-                          <label for="phone">Номер телефона</label>
-                          <input type="tel" id="phone" name="phone" required>
-                      </div>
+                    <div class="form-group">
+                        <label for="phone">Номер телефона</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
 
-                      <div class="form-group">
-                          <label for="address">Адрес доставки</label>
-                          <input type="text" id="address" name="address" required>
-                          <p class="small-note">Доставка осуществляется только по Москве</p>
-                      </div>
+                    <div class="form-group">
+                        <label for="address">Адрес доставки</label>
+                        <input type="text" id="address" name="address" required>
+                        <p class="small-note">Доставка осуществляется только по Москве</p>
+                    </div>
 
-                      <div class="form-group"> 
+                    <div class="form-group"> 
                         <label>Время доставки:</label> 
                         <div class="radio-group"> 
                             <div class="radio-item">
@@ -192,25 +146,23 @@
                             </div>
                         </div> 
                     </div>
-                    
 
-                      <div class="form-group">
-                          <label for="delivery_time">Укажите время доставки</label>
-                          <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
-                          <p class="small-note">Доступное время доставки с 7:00 до 23:00</p>
-                      </div>
-
-                      <div class="form-buttons">
-                          <button type="reset">Сбросить</button>
-                          <button type="submit">Отправить</button>
-                      </div>
+                    <div class="form-group">
+                        <label for="delivery_time">Укажите время доставки</label>
+                        <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
+                        <p class="small-note">Доступное время доставки с 7:00 до 23:00</p>
                     </div>
 
-                </form>
-            </div>
+                    <div class="form-buttons">
+                      <button type="button" id="reset-button">Сбросить</button>
+                      <button type="submit">Отправить</button>
+                  </div>                  
+                </div>
+
+            </form>
+        </div>
         </main>
 
-        <!-- Футер -->
         <footer id="contacts">
             <p>Контактные данные:</p>
             <p>Квиткина Ульяна 231-3211</p>
@@ -218,5 +170,8 @@
             <p>Email: <a href="mailto:info@example.com">marusam263@gmail.com</a></p>
         </footer>
     </div>
+    
+    <script src="dishes.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
