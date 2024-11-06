@@ -73,66 +73,158 @@
                 </div>
                 <div class="menu-grid" id="desserts-menu"></div>
             </section>
+
+            <!-- Заголовок -->
+        <h2>Доступные варианты ланча</h2>
+
+        <!-- Блок с вариантами ланча -->
+        <div class="lunch-options">
+            <!-- Пример карточек для каждого варианта ланча -->
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="soup.png" alt="Суп">
+                    <p1>Суп</p1>
+                </div>
+                <div class="dish">
+                    <img src="main.png" alt="Главное блюдо">
+                    <p1>Главное блюдо</p1>
+                </div>
+                <div class="dish">
+                    <img src="salad.png" alt="Салат">
+                    <p1>Салат</p1>
+                </div>
+                <div class="dish">
+                    <img src="drink.png" alt="Напиток">
+                    <p1>Напиток</p1>
+                </div>
+            </div>
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="soup.png" alt="Суп">
+                    <p1>Суп</p1>
+                </div>
+                <div class="dish">
+                    <img src="main.png" alt="Главное блюдо">
+                    <p1>Главное блюдо</p1>
+                </div>
+                <div class="dish">
+                    <img src="drink.png" alt="Напиток">
+                    <p1>Напиток</p1>
+                </div>
+            </div>
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="soup.png" alt="Суп">
+                    <p1>Суп</p1>
+                </div>
+                <div class="dish">
+                    <img src="salad.png" alt="Салат">
+                    <p1>Салат</p1>
+                </div>
+                <div class="dish">
+                    <img src="drink.png" alt="Напиток">
+                    <p1>Напиток</p1>
+                </div>
+            </div>
+            </div>
+            <div class="lunch-options">
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="main.png" alt="Главное блюдо">
+                    <p1>Главное блюдо</p1>
+                </div>
+                <div class="dish">
+                    <img src="salad.png" alt="Салат">
+                    <p1>Салат</p1>
+                </div>
+                <div class="dish">
+                    <img src="drink.png" alt="Напиток">
+                    <p1>Напиток</p1>
+                </div>
+            </div>
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="main.png" alt="Главное блюдо">
+                    <p1>Главное блюдо</p1>
+                </div>
+                <div class="dish">
+                    <img src="drink.png" alt="Напиток">
+                    <p1>Напиток</p1>
+                </div>
+                
+            </div>
+            <div class="lunch-card">
+                <div class="dish">
+                    <img src="dess.png" alt="Десерт">
+                    <p1>Десерт</p1>
+                    <p2>Десерты можно добавить к любому ланчу.</p2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уведомление -->
+        <div class="notification" id="notification">
+            <p id="notification-text"></p>
+            <button onclick="closeNotification()">Окей</button>
+        </div>
+
         
         <div class="container">
             <h1>Сделать заказ</h1>
-            <form action="https://httpbin.org/post" method="POST">
+            <form action="https://httpbin.org/post" method="POST" onsubmit="return validateOrder()">
                 <div class="block client-order">
-                  <div id="order-summary"> 
-                    <h2>Ваш заказ</h2> 
-                    <p id="general-status2" style="display: block;">Ничего не выбрано</p>
-                    <div id="general-status" style="display: none;">
-                      <p><strong>Суп</strong></p>
-                      <p><span id="soup-order">Не выбрано</span></p> 
-                    <p><strong>Главное блюдо</strong></p>
-                    <p><span id="main-order">Не выбрано</span></p>
-                    <p><strong>Салаты и стартеры</strong></p>
-                    <p><span id="salat-order">Не выбрано</span></p> 
-                    <p><strong>Напиток</strong></p>
-                    <p><span id="drink-order">Не выбрано</span></p> 
-                    <p><strong>Десерты</strong></p>
-                    <p><span id="desserts-order">Не выбрано</span></p> 
-                    <p><strong>Общая сумма</strong></p>
-                    <p></strong> <span id="total-cost">0 ₽</span></p>
-                  </div>
-                </div>
-                
-                    
+                    <div id="order-summary"> 
+                        <h2>Ваш заказ</h2> 
+                        <p id="general-status2" style="display: block;">Ничего не выбрано</p>
+                        <div id="general-status" style="display: none;">
+                            <p><strong>Суп</strong></p>
+                            <p><span id="soup-order">Не выбрано</span></p> 
+                            <p><strong>Главное блюдо</strong></p>
+                            <p><span id="main-order">Не выбрано</span></p>
+                            <p><strong>Салаты и стартеры</strong></p>
+                            <p><span id="salat-order">Не выбрано</span></p> 
+                            <p><strong>Напиток</strong></p>
+                            <p><span id="drink-order">Не выбрано</span></p> 
+                            <p><strong>Десерты</strong></p>
+                            <p><span id="desserts-order">Не выбрано</span></p> 
+                            <p><strong>Общая сумма</strong></p>
+                            <p></strong> <span id="total-cost">0 ₽</span></p>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="comments">Комментарий</label>
                         <textarea id="comments" name="comments" rows="4"></textarea>
                     </div>
                 </div>
-
+            
                 <div class="block client-data">
                     <h2>Ваши данные</h2>
-
                     <div class="form-group">
                         <label for="name">Имя</label>
                         <input type="text" id="name" name="name" required>
                     </div>
-
+            
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-
+            
                     <div class="checkbox-container">
                         <input type="checkbox" id="subscribe" name="subscribe" checked>
                         <label for="subscribe">Получать информацию о скидках и акциях</label>
                     </div>
-
+            
                     <div class="form-group">
                         <label for="phone">Номер телефона</label>
                         <input type="tel" id="phone" name="phone" required>
                     </div>
-
+            
                     <div class="form-group">
                         <label for="address">Адрес доставки</label>
                         <input type="text" id="address" name="address" required>
                         <p class="small-note">Доставка осуществляется только по Москве</p>
                     </div>
-
+            
                     <div class="form-group"> 
                         <label>Время доставки:</label> 
                         <div class="radio-group"> 
@@ -146,19 +238,18 @@
                             </div>
                         </div> 
                     </div>
-
+            
                     <div class="form-group">
                         <label for="delivery_time">Укажите время доставки</label>
                         <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
                         <p class="small-note">Доступное время доставки с 7:00 до 23:00</p>
                     </div>
-
+            
                     <div class="form-buttons">
-                      <button type="button" id="reset-button">Сбросить</button>
-                      <button type="submit">Отправить</button>
-                  </div>                  
+                        <button type="button" id="reset-button">Сбросить</button>
+                        <button type="submit">Отправить</button>
+                    </div>
                 </div>
-
             </form>
         </div>
         </main>

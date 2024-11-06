@@ -36,21 +36,22 @@ const drinksMenu = document.getElementById('drinks-menu');
       }
 
       function updateOrder(dish) {
-          // Обновляем выбранное блюдо в соответствующей категории
-          if (dish.category === 'soup') {
-              selectedDishes.soup = dish;
-          } else if (dish.category === 'main') {
-              selectedDishes.main = dish;
-          } else if (dish.category === 'drink') {
-              selectedDishes.drink = dish;
-          } else if (dish.category === 'desserts') {
-              selectedDishes.desserts = dish;
-          } else if (dish.category === 'salat') {
-              selectedDishes.salat = dish;}
-
-          // Обновляем отображение заказа
-          updateOrderDisplay();
-      }
+        // Обновляем выбранное блюдо в соответствующей категории
+        if (dish.category === 'soup') {
+            selectedDishes.soup = dish;
+        } else if (dish.category === 'main') {
+            selectedDishes.main = dish;
+        } else if (dish.category === 'drink') {
+            selectedDishes.drink = dish;
+        } else if (dish.category === 'desserts') {
+            selectedDishes.desserts = dish;
+        } else if (dish.category === 'salat') {
+            selectedDishes.salat = dish;
+        }
+    
+        // Обновляем отображение заказа
+        updateOrderDisplay();
+    }
 
       function updateOrderDisplay() { 
         console.log(selectedDishes); // Логируем выбранные блюда
@@ -190,10 +191,7 @@ const drinksMenu = document.getElementById('drinks-menu');
                 }
             });
         }
-        
-        
 
-        // Пример добавления блюда
         function createDishCard(dish) {
             const dishDiv = document.createElement('div');
             dishDiv.classList.add('menu-item');
@@ -214,3 +212,67 @@ const drinksMenu = document.getElementById('drinks-menu');
 
             return dishDiv;
         }
+
+
+
+// Доступные для заказа варианты ланча
+const validCombos = [
+    ['Суп', 'Главное блюдо', 'Салат', 'Напиток'],
+    ['Суп', 'Главное блюдо', 'Напиток'],
+    ['Суп', 'Салат', 'Напиток'],
+    ['Главное блюдо', 'Салат', 'Напиток'],
+    ['Главное блюдо', 'Напиток']
+];
+
+// Проверка на корректность выбранных блюд
+function validateOrder() {
+    // Сбор фактически выбранных пользователем блюд
+    const selectedDishNames = [];
+    
+    if (selectedDishes.soup) selectedDishNames.push("Суп");
+    if (selectedDishes.main) selectedDishNames.push("Главное блюдо");
+    if (selectedDishes.salat) selectedDishNames.push("Салат");
+    if (selectedDishes.desserts) selectedDishNames.push("Десерт");
+    if (selectedDishes.drink) selectedDishNames.push("Напиток");
+
+    // Проверка на наличие хотя бы одного блюда
+    if (selectedDishNames.length === 0) {
+        showNotification("Ничего не выбрано. Выберите блюда для заказа");
+        return false;
+    }
+
+    const hasDrink = selectedDishNames.includes("Напиток");
+    const hasSoup = selectedDishNames.includes("Суп");
+    const hasMainDish = selectedDishNames.includes("Главное блюдо");
+    const hasSalad = selectedDishNames.includes("Салат");
+
+    // Проверки для корректного выбора
+    if (!hasDrink) {
+        showNotification("Выберите напиток");
+    } else if (hasSoup && !(hasMainDish || hasSalad)) {
+        showNotification("Выберите главное блюдо/салат");
+    } else if (hasSalad && !(hasMainDish || hasSoup)) {
+        showNotification("Выберите суп и/или главное блюдо");
+    } else if (!hasMainDish && (hasDrink || selectedDishNames.includes("Десерт")) && !hasSoup) {
+        showNotification("Выберите главное блюдо");
+    } else {
+        return true; // Позволяет отправку формы, если все проверки пройдены
+    }
+
+    return false; // Предотвращает отправку формы, если не все условия соблюдены
+}
+// Проверка, соответствует ли набор блюд одному из комбо
+function isValidCombo(selectedDishes) {
+    return validCombos.some(combo => combo.every(dish => selectedDishes.includes(dish)) && selectedDishes.length === combo.length);
+}
+
+// Показ уведомления
+function showNotification(message) {
+    document.getElementById("notification-text").textContent = message;
+    document.getElementById("notification").style.display = "block";
+}
+
+// Закрытие уведомления
+function closeNotification() {
+    document.getElementById("notification").style.display = "none";
+}
