@@ -4,6 +4,49 @@ const salatMenu = document.getElementById('salat-menu');
 const dessertsMenu = document.getElementById('desserts-menu');
 const drinksMenu = document.getElementById('drinks-menu');
 
+// Функция для загрузки блюд с использованием API
+async function loadDishes() {
+    try {
+        const response = await fetch("http://lab7-api.std-900.ist.mospolytech.ru/api/dishes");
+        if (!response.ok) {
+            throw new Error(`Ошибка загрузки данных: ${response.statusText}`);
+        }
+        const dishes = await response.json();
+
+        // Очистка меню перед добавлением новых блюд
+        soupsMenu.innerHTML = '';
+        mainMenu.innerHTML = '';
+        salatMenu.innerHTML = '';
+        dessertsMenu.innerHTML = '';
+        drinksMenu.innerHTML = '';
+
+        // Добавление блюд в соответствующие секции меню
+        dishes.sort((a, b) => a.name.localeCompare(b.name)); // Сортировка блюд по имени
+
+        dishes.forEach(dish => {
+            const dishCard = createDishCard(dish);
+
+            if (dish.category === 'soup') {
+                soupsMenu.appendChild(dishCard);
+            } else if (dish.category === 'main-course') {
+                mainMenu.appendChild(dishCard);
+            } else if (dish.category === 'salad') {
+                salatMenu.appendChild(dishCard);
+            } else if (dish.category === 'dessert') {
+                dessertsMenu.appendChild(dishCard);
+            } else if (dish.category === 'drink') {
+                drinksMenu.appendChild(dishCard);
+            }
+        });
+    } catch (error) {
+        console.error("Произошла ошибка при загрузке блюд:", error);
+    }
+}
+
+// Вызов функции загрузки блюд при загрузке страницы
+document.addEventListener("DOMContentLoaded", loadDishes);
+
+
 
       // Хранение выбранных блюд
       const selectedDishes = {
@@ -39,13 +82,13 @@ const drinksMenu = document.getElementById('drinks-menu');
         // Обновляем выбранное блюдо в соответствующей категории
         if (dish.category === 'soup') {
             selectedDishes.soup = dish;
-        } else if (dish.category === 'main') {
+        } else if (dish.category === 'main-course') {
             selectedDishes.main = dish;
         } else if (dish.category === 'drink') {
             selectedDishes.drink = dish;
-        } else if (dish.category === 'desserts') {
+        } else if (dish.category === 'dessert') {
             selectedDishes.desserts = dish;
-        } else if (dish.category === 'salat') {
+        } else if (dish.category === 'salad') {
             selectedDishes.salat = dish;
         }
     
@@ -103,11 +146,11 @@ const drinksMenu = document.getElementById('drinks-menu');
 
           if (dish.category === 'soup') {
               soupsMenu.appendChild(dishCard);
-          } else if (dish.category === 'main') {
+          } else if (dish.category === 'main-course') {
               mainMenu.appendChild(dishCard);
-          } else if (dish.category === 'salat') {
+          } else if (dish.category === 'salad') {
               salatMenu.appendChild(dishCard);
-          } else if (dish.category === 'desserts') {
+          } else if (dish.category === 'dessert') {
               dessertsMenu.appendChild(dishCard);
           } else if (dish.category === 'drink') {
               drinksMenu.appendChild(dishCard);
@@ -182,20 +225,22 @@ const drinksMenu = document.getElementById('drinks-menu');
             const dishes = Array.from(currentMenu.children); // Все блюда в секции
         
             dishes.forEach(dish => {
-                const dishKind = dish.dataset.dish; // Предполагается, что dish.dataset.dish содержит значение kind
+                const dishKind = dish.dataset.dish;
         
+                // Если фильтров нет или текущий элемент соответствует активному фильтру
                 if (activeFilters[section].length === 0 || activeFilters[section].includes(dishKind)) {
-                    dish.style.display = 'block';
+                    dish.classList.remove('hidden'); // Показать элемент, убрав класс 'hidden'
                 } else {
-                    dish.style.display = 'none';
+                    dish.classList.add('hidden'); // Скрыть элемент, добавив класс 'hidden'
                 }
             });
         }
+        
 
         function createDishCard(dish) {
             const dishDiv = document.createElement('div');
             dishDiv.classList.add('menu-item');
-            dishDiv.setAttribute('data-dish', dish.kind); // Пример, dish.kind - это значение kind
+            dishDiv.setAttribute('data-dish', dish.kind);
 
             dishDiv.innerHTML = `
                 <img src="${dish.image}" alt="${dish.name}">

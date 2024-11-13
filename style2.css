@@ -20,7 +20,7 @@
             padding: 0; 
             background-color: #f4f4f4; 
 
-            font-size: 16px; / Или другой желаемый размер, например, 18px, 20px /
+            font-size: 16px;
         }
         
         /* Контейнер для полей */
@@ -133,7 +133,7 @@
         }
 
         /* Стили для меню заказов на дом*/
-.menu-grid {
+  .menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
@@ -147,7 +147,24 @@
     background-color: #fff;
     cursor: pointer;
     filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
-  }
+    justify-content: space-between; /* Центрирует элементы внутри */
+    height: 100%; /* Устанавливаем одинаковую высоту */
+}
+
+.menu-item button {
+    background-color: #f1eee9;
+    color: #333;
+    padding: 10px 0; /* Вертикальные отступы */
+    width: 100%; /* Растягиваем кнопку на всю ширину контейнера */
+    border-radius: 10px;
+    margin-top: auto; /* Это обеспечит выравнивание кнопки внизу */
+    text-align: center; /* Выравнивание текста по центру */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border: none;
+    font-size: 1rem; /* Размер шрифта для кнопки */
+}
+
   
   .menu-item:hover {
     border: 2px solid tomato;
@@ -157,6 +174,7 @@
     background-color: tomato;
     color: #fff;
   }
+
   
   /* Стили для изображения */
 section > div > div > img {
@@ -200,15 +218,26 @@ section > div > div > img {
     color: #505050;
   }
   
-  
-  .menu-item button {
+
+  .menu-item .add-button {
     background-color: #f1eee9;
     color: #333;
-    padding: 10px 30px;
+    padding: 10px 0; /* Вертикальные отступы */
+    width: 100%; /* Растягиваем кнопку на всю ширину контейнера */
     border-radius: 10px;
     margin-top: 20px;
+    text-align: center; /* Выравнивание текста по центру */
     cursor: pointer;
-  }
+    transition: background-color 0.3s, color 0.3s;
+    border: none;
+    font-size: 1rem; /* Размер шрифта для кнопки */
+}
+
+.menu-item:hover .add-button {
+    background-color: tomato;
+    color: #fff;
+}
+
   
   /* Адаптивность */
   @media (max-width: 1024px) {
@@ -323,6 +352,20 @@ input[type="radio"] {
     justify-content: space-between;
 }
 
+.filter-button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button.active {
+  background-color: #f44336;
+  color: white;
+}
+
 button {
     padding: 10px 20px;
     font-size: 1em;
@@ -341,19 +384,7 @@ button[type="submit"] {
     color: white;
 }
 
-.filter-button {
-  padding: 10px;
-  margin: 5px;
-  border: none;
-  background-color: #f0f0f0;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-.filter-button.active {
-  background-color: #f44336;
-  color: white;
-}
 
 
         /* Grid-контейнер для вариантов ланча */
@@ -437,3 +468,8 @@ button[type="submit"] {
           background-color: white;
           color: tomato;
       }
+
+      .hidden {
+        display: none;
+    }
+    
