@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadSelectedDishesFromStorage() {
-    // Получение данных из localStorage, если они существуют
+    // Получаем данные из localStorage
     const storedDishes = JSON.parse(localStorage.getItem('selectedDishes')) || {};
 
     // Устанавливаем значения выбранных блюд
@@ -21,8 +21,11 @@ function loadSelectedDishesFromStorage() {
     selectedDishes.desserts = storedDishes.desserts || null;
     selectedDishes.drink = storedDishes.drink || null;
 
-    // Обновление отображения заказа
-    updateOrderDisplay();
+    // Загружаем блюда с сервера для их отображения
+    loadDishes().then(() => {
+        // После загрузки блюд обновляем отображение
+        updateOrderDisplay();
+    });
 }
 
 
@@ -52,26 +55,21 @@ async function loadDishes() {
         dessertsMenu.innerHTML = '';
         drinksMenu.innerHTML = '';
 
-        // Добавление блюд в соответствующие секции меню
-        dishes.sort((a, b) => a.name.localeCompare(b.name)); // Сортировка блюд по имени
-
-        dishes.forEach(dish => {
-            const dishCard = createDishCard(dish);
-
-            if (dish.category === 'soup') {
-                soupsMenu.appendChild(dishCard);
-            } else if (dish.category === 'main-course') {
-                mainMenu.appendChild(dishCard);
-            } else if (dish.category === 'salad') {
-                salatMenu.appendChild(dishCard);
-            } else if (dish.category === 'dessert') {
-                dessertsMenu.appendChild(dishCard);
-            } else if (dish.category === 'drink') {
-                drinksMenu.appendChild(dishCard);
-            }
-        });
+        // Создаем карты для выбранных блюд, если они есть
+        createDishCardFromStorage(selectedDishes.soup, soupsMenu, 'soup');
+        createDishCardFromStorage(selectedDishes.main, mainMenu, 'main-course');
+        createDishCardFromStorage(selectedDishes.salat, salatMenu, 'salad');
+        createDishCardFromStorage(selectedDishes.desserts, dessertsMenu, 'dessert');
+        createDishCardFromStorage(selectedDishes.drink, drinksMenu, 'drink');
     } catch (error) {
         console.error("Произошла ошибка при загрузке блюд:", error);
+    }
+}
+
+function createDishCardFromStorage(dish, menu, category) {
+    if (dish) {
+        const dishCard = createDishCard(dish);
+        menu.appendChild(dishCard);
     }
 }
 
@@ -134,9 +132,11 @@ document.addEventListener("DOMContentLoaded", loadDishes);
 
     function updateOrderDisplay() {
         console.log(selectedDishes); // Логируем выбранные блюда
-    
+        
+        // Проверка, выбрано ли хотя бы одно блюдо
         const isAnyDishSelected = selectedDishes.soup || selectedDishes.main || selectedDishes.drink || selectedDishes.salat || selectedDishes.desserts;
     
+        // Отображение заказа
         const soupOrder = selectedDishes.soup ? `${selectedDishes.soup.name} ${selectedDishes.soup.price} ₽` : "Не выбрано";
         const mainOrder = selectedDishes.main ? `${selectedDishes.main.name} ${selectedDishes.main.price} ₽` : "Не выбрано";
         const dessertsOrder = selectedDishes.desserts ? `${selectedDishes.desserts.name} ${selectedDishes.desserts.price} ₽` : "Не выбрано";
@@ -337,8 +337,7 @@ function validateOrder() {
     } else if (!hasMainDish && (hasDrink || selectedDishNames.includes("Десерт")) && !hasSoup) {
         showNotification("Выберите главное блюдо");
     } else {
-        window.location.href = "zakaz.html";
-        return false; // Позволяет отправку формы, если все проверки пройдены
+        return true; // Позволяет отправку формы, если все проверки пройдены
     }
 
     return false; // Предотвращает отправку формы, если не все условия соблюдены

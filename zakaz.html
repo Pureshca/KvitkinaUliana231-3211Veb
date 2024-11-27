@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Vortex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vortex</h1>
+            <nav>
+                <ul>
+                    <li><a href="lab.html#g">Главная</a></li>
+                    <li><a href="lab.html#gas">О ресторане</a></li>
+                    <li><a href="Lanch.html">Заказ на дом</a></li>
+                    <li><a href="zakaz.html" class="active">Оформить заказ</a></li>
+                    <li><a href="lab.html#menu">Меню</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="sostav">
+                <h2>Состав заказа</h2>
+                <section id="menu">
+                    <div class="menu-grid" id="menu-items"></div>
+                </section>
+                
+            </section>
+
+        <!-- Уведомление -->
+        <div class="notification" id="notification">
+            <p id="notification-text"></p>
+            <button onclick="closeNotification()">Окей</button>
+        </div>
+
+            <div class="container">
+                <h1>Сделать заказ</h1>
+                <form action="https://edu.std-900.ist.mospolytech.ru" method="fetch" onsubmit="return validateOrder()">
+                    <div class="block client-order">
+                        <div id="order-summary"> 
+                            <h2>Ваш заказ</h2> 
+                            <p id="general-status2" style="display: block;">Ничего не выбрано. Чтобы добавить блюда в заказ, перейдите на страницу <a href="Lanch.html">Собрать ланч</a>.</p>
+                            <div id="general-status" style="display: none;">
+                                <p><strong>Суп</strong></p>
+                                <p><span id="soup-order">Не выбрано</span></p> 
+                                <p><strong>Главное блюдо</strong></p>
+                                <p><span id="main-order">Не выбрано</span></p>
+                                <p><strong>Салаты и стартеры</strong></p>
+                                <p><span id="salat-order">Не выбрано</span></p> 
+                                <p><strong>Напиток</strong></p>
+                                <p><span id="drink-order">Не выбрано</span></p> 
+                                <p><strong>Десерты</strong></p>
+                                <p><span id="desserts-order">Не выбрано</span></p> 
+                                <p><strong>Общая сумма</strong></p>
+                                <p></strong> <span id="total-cost">0 ₽</span></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comments">Комментарий</label>
+                            <textarea id="comments" name="comments" rows="4"></textarea>
+                        </div>
+                    </div>
+                
+                    <div class="block client-data">
+                        <h2>Ваши данные</h2>
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="subscribe" name="subscribe" checked>
+                            <label for="subscribe">Получать информацию о скидках и акциях</label>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="phone">Номер телефона</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="address">Адрес доставки</label>
+                            <input type="text" id="address" name="address" required>
+                            <p class="small-note">Доставка осуществляется только по Москве</p>
+                        </div>
+                
+                        <div class="form-group"> 
+                            <label>Время доставки:</label> 
+                            <div class="radio-group"> 
+                                <div class="radio-item">
+                                    <input type="radio" id="asap" name="delivery_time" value="asap" required> 
+                                    <label for="asap">Как можно скорее</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="specified" name="delivery_time" value="specified" required> 
+                                    <label for="specified">К указанному времени</label>
+                                </div>
+                            </div> 
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="delivery_time">Укажите время доставки</label>
+                            <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
+                            <p class="small-note">Доступное время доставки с 7:00 до 23:00</p>
+                        </div>
+                
+                        <div class="form-buttons">
+                            <button type="button" id="reset-button">Сбросить</button>
+                            <button type="submit">Отправить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </main>
+            <footer id="contacts">
+                <p>Контактные данные:</p>
+                <p>Квиткина Ульяна 231-3211</p>
+                <p>Телефон: <a href="tel:+79991234567">+7 (920) 454-43-88</a></p>
+                <p>Email: <a href="mailto:info@example.com">marusam263@gmail.com</a></p>
+            </footer>
+        </div>
+        
+        <script src="dishes.js"></script>
+        <script src="script1.js"></script>
+    </body>
+    </html>
