@@ -5,20 +5,75 @@ document.addEventListener('DOMContentLoaded', () => {
     updateOrderButton();
 });
 
+document.querySelector('form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Предотвращаем отправку формы стандартным способом
+
+    if (validateOrder()) {
+        // Сбор данных формы
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Добавление данных о выбранных блюдах в formData
+        formData.append('selectedDishes', JSON.stringify(selectedDishes));
+
+        // Создаем объект заказа с текущей датой
+        const order = {
+            date: new Date().toISOString(), // Текущая дата в ISO формате
+            dishes: selectedDishes,
+            formData: Object.fromEntries(formData), // Преобразуем FormData в обычный объект
+        };
+
+        // Сохраняем заказ в localStorage
+        saveOrderToLocalStorage(order);
+
+        try {
+            // Отправка запроса на сервер
+            const response = await fetch('https://edu.std-900.ist.mospolytech.ru/labs/api/orders?api_key=cb10a308-4f2b-4f17-8eaa-3df2eca01333', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    // Заголовки не требуются для FormData, они будут установлены автоматически
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка отправки данных: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Успешный ответ от сервера:', result);
+
+            // Показываем уведомление об успешном заказе
+            showNotification("Ваш заказ успешно отправлен!");
+            form.reset(); // Сбрасываем форму
+            resetOrder(); // Сбрасываем выбранные блюда
+
+        } catch (error) {
+            console.error('Ошибка при отправке заказа:', error);
+            showNotification("Произошла ошибка при отправке заказа. Попробуйте снова.");
+        }
+    }
+});
+
+// Функция для сохранения заказа в localStorage
+function saveOrderToLocalStorage(order) {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.unshift(order); // Добавляем новый заказ в начало массива
+    orders.sort((a, b) => new Date(b.date) - new Date(a.date)); // Сортируем по убыванию даты
+    localStorage.setItem('orders', JSON.stringify(orders)); // Сохраняем обновленный список заказов
+}
+
+// Функция для загрузки выбранных блюд из localStorage
 function loadSelectedDishesFromStorage() {
-    // Получаем данные из localStorage
     const storedDishes = JSON.parse(localStorage.getItem('selectedDishes')) || {};
 
-    // Устанавливаем значения выбранных блюд
     selectedDishes.soup = storedDishes.soup || null;
     selectedDishes.main = storedDishes.main || null;
     selectedDishes.salat = storedDishes.salat || null;
     selectedDishes.desserts = storedDishes.desserts || null;
     selectedDishes.drink = storedDishes.drink || null;
 
-    // Загружаем блюда с сервера для их отображения
     loadDishes().then(() => {
-        // После загрузки блюд обновляем отображение
         updateOrderDisplay();
     });
 }
@@ -53,6 +108,13 @@ async function loadDishes() {
         createDishCardFromStorage(selectedDishes.drink, 'drink');
     } catch (error) {
         console.error("Произошла ошибка при загрузке блюд:", error);
+    }
+}
+
+function createDishCardFromStorage(dish, category) {
+    if (dish) {
+        const dishCard = createDishCard(dish);
+        menuItemsContainer.appendChild(dishCard);
     }
 }
 
@@ -173,19 +235,11 @@ document.addEventListener("DOMContentLoaded", loadDishes);
       dishes.sort((a, b) => a.name.localeCompare(b.name)); // Сортировка блюд по имени
 
       dishes.forEach(dish => {
-          const dishCard = createDishCard(dish);
+        const dishCard = createDishCard(dish);
 
-          if (dish.category === 'soup') {
-              soupsMenu.appendChild(dishCard);
-          } else if (dish.category === 'main-course') {
-              mainMenu.appendChild(dishCard);
-          } else if (dish.category === 'salad') {
-              salatMenu.appendChild(dishCard);
-          } else if (dish.category === 'dessert') {
-              dessertsMenu.appendChild(dishCard);
-          } else if (dish.category === 'drink') {
-              drinksMenu.appendChild(dishCard);
-          }
+          
+        menuItemsContainer.appendChild(dishCard);
+          
       });
 
         document.getElementById('reset-button').addEventListener('click', resetOrder);
@@ -204,9 +258,13 @@ document.addEventListener("DOMContentLoaded", loadDishes);
             // Очистить отображение заказа
             updateOrderDisplay();
         
+            // Очистить контейнер с карточками блюд
+            menuItemsContainer.innerHTML = '';
+        
             // Сбросить форму
             document.querySelector('form').reset();
         }
+        
 
 
 

@@ -4,37 +4,12 @@ const salatMenu = document.getElementById('salat-menu');
 const dessertsMenu = document.getElementById('desserts-menu');
 const drinksMenu = document.getElementById('drinks-menu');
 
+// Вызов функции загрузки блюд при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    loadDishes();
-    loadSelectedDishesFromStorage();  // Загрузка выбранных блюд из localStorage
+    loadSelectedDishesFromStorage(); // Загружаем выбранные блюда из localStorage
+    updateOrderDisplay();
     updateOrderButton();
 });
-
-function loadSelectedDishesFromStorage() {
-    // Получение данных из localStorage, если они существуют
-    const storedDishes = JSON.parse(localStorage.getItem('selectedDishes')) || {};
-
-    // Устанавливаем значения выбранных блюд
-    selectedDishes.soup = storedDishes.soup || null;
-    selectedDishes.main = storedDishes.main || null;
-    selectedDishes.salat = storedDishes.salat || null;
-    selectedDishes.desserts = storedDishes.desserts || null;
-    selectedDishes.drink = storedDishes.drink || null;
-
-    // Обновление отображения заказа
-    updateOrderDisplay();
-}
-
-
-// Функция для обновления состояния кнопки
-function updateOrderButton() {
-    const orderButton = document.getElementById("order-button");
-    if (validateOrder1()) {
-        orderButton.disabled = false; // Активировать кнопку
-    } else {
-        orderButton.disabled = true; // Деактивировать кнопку
-    }
-}
 
 // Функция для загрузки блюд с использованием API
 async function loadDishes() {
@@ -75,10 +50,38 @@ async function loadDishes() {
     }
 }
 
+
+
+function loadSelectedDishesFromStorage() {
+    // Получаем данные из localStorage
+    const storedDishes = JSON.parse(localStorage.getItem('selectedDishes')) || {};
+
+    // Устанавливаем значения выбранных блюд
+    selectedDishes.soup = storedDishes.soup || null;
+    selectedDishes.main = storedDishes.main || null;
+    selectedDishes.salat = storedDishes.salat || null;
+    selectedDishes.desserts = storedDishes.desserts || null;
+    selectedDishes.drink = storedDishes.drink || null;
+
+    // Загружаем блюда с сервера для их отображения
+    loadDishes().then(() => {
+        // После загрузки блюд обновляем отображение
+        updateOrderDisplay();
+    });
+}
+
+// Функция для обновления состояния кнопки
+function updateOrderButton() {
+    const orderButton = document.getElementById("order-button");
+    if (validateOrder1()) {
+        orderButton.disabled = false; // Активировать кнопку
+    } else {
+        orderButton.disabled = true; // Деактивировать кнопку
+    }
+}
+
 // Вызов функции загрузки блюд при загрузке страницы
 document.addEventListener("DOMContentLoaded", loadDishes);
-
-
 
       // Хранение выбранных блюд
       const selectedDishes = {
@@ -105,6 +108,7 @@ document.addEventListener("DOMContentLoaded", loadDishes);
           // Добавляем обработчик события для кнопки "Добавить"
           dishDiv.querySelector('.add-button').addEventListener('click', () => {
               updateOrder(dish);
+              
           });
 
           return dishDiv;
@@ -124,51 +128,34 @@ document.addEventListener("DOMContentLoaded", loadDishes);
             selectedDishes.salat = dish;
         }
     
-        // Сохраняем выбранные блюда в localStorage
-        localStorage.setItem('selectedDishes', JSON.stringify(selectedDishes));
-    
         // Обновляем отображение заказа
+        
+        // Обновляем localStorage
         updateOrderDisplay();
+        localStorage.setItem('selectedDishes', JSON.stringify(selectedDishes));
         updateOrderButton();
+        updateOrderDisplay();
     }
 
     function updateOrderDisplay() {
-        console.log(selectedDishes); // Логируем выбранные блюда
+        const currentCostElement = document.getElementById('current-cost');
+        const proceedButton = document.getElementById('proceed-button');
+        const orderPanel = document.getElementById('order-panel');
     
-        const isAnyDishSelected = selectedDishes.soup || selectedDishes.main || selectedDishes.drink || selectedDishes.salat || selectedDishes.desserts;
-    
-        const soupOrder = selectedDishes.soup ? `${selectedDishes.soup.name} ${selectedDishes.soup.price} ₽` : "Не выбрано";
-        const mainOrder = selectedDishes.main ? `${selectedDishes.main.name} ${selectedDishes.main.price} ₽` : "Не выбрано";
-        const dessertsOrder = selectedDishes.desserts ? `${selectedDishes.desserts.name} ${selectedDishes.desserts.price} ₽` : "Не выбрано";
-        const salatOrder = selectedDishes.salat ? `${selectedDishes.salat.name} ${selectedDishes.salat.price} ₽` : "Не выбрано";
-        const drinkOrder = selectedDishes.drink ? `${selectedDishes.drink.name} ${selectedDishes.drink.price} ₽` : "Не выбрано";
-    
-        document.getElementById('soup-order').textContent = soupOrder;
-        document.getElementById('main-order').textContent = mainOrder;
-        document.getElementById('salat-order').textContent = salatOrder;
-        document.getElementById('desserts-order').textContent = dessertsOrder;
-        document.getElementById('drink-order').textContent = drinkOrder;
-    
-        // Общая стоимость
+        // Рассчитываем текущую сумму
         const totalCost = (selectedDishes.soup ? selectedDishes.soup.price : 0) +
                           (selectedDishes.main ? selectedDishes.main.price : 0) +
-                          (selectedDishes.desserts ? selectedDishes.desserts.price : 0) +
                           (selectedDishes.salat ? selectedDishes.salat.price : 0) +
+                          (selectedDishes.desserts ? selectedDishes.desserts.price : 0) +
                           (selectedDishes.drink ? selectedDishes.drink.price : 0);
-        document.getElementById('total-cost').textContent = `${totalCost} ₽`;
     
-        // Управление статусами
-        const generalStatus = document.getElementById('general-status');
-        const generalStatus2 = document.getElementById('general-status2');
-        if (isAnyDishSelected) {
-            generalStatus.style.display = 'block';
-            generalStatus2.style.display = 'none';
-        } else {
-            generalStatus.style.display = 'none';
-            generalStatus2.style.display = 'block';
-        }
+        // Обновляем отображение суммы
+        currentCostElement.textContent = `Сумма: ${totalCost} ₽`;
+    
+        // Управляем видимостью панели
+        const hasSelection = Object.values(selectedDishes).some(Boolean);
+        orderPanel.classList.toggle('hidden', !hasSelection);
     }
-    
     
 
       // Добавление блюд в соответствующие секции
@@ -190,25 +177,6 @@ document.addEventListener("DOMContentLoaded", loadDishes);
           }
       });
 
-        document.getElementById('reset-button').addEventListener('click', resetOrder);
-
-        function resetOrder() {
-            // Сбросить выбранные блюда
-            selectedDishes.soup = null;
-            selectedDishes.main = null;
-            selectedDishes.salat = null;
-            selectedDishes.desserts = null;
-            selectedDishes.drink = null;
-        
-            // Очистить localStorage
-            localStorage.removeItem('selectedDishes');
-        
-            // Очистить отображение заказа
-            updateOrderDisplay();
-        
-            // Сбросить форму
-            document.querySelector('form').reset();
-        }
 
         const filterButtons = document.querySelectorAll('.filter-button');
         const menus = {
@@ -294,8 +262,6 @@ document.addEventListener("DOMContentLoaded", loadDishes);
             return dishDiv;
         }
 
-
-
 // Доступные для заказа варианты ланча
 const validCombos = [
     ['Суп', 'Главное блюдо', 'Салат', 'Напиток'],
@@ -306,47 +272,6 @@ const validCombos = [
 ];
 
 // Проверка на корректность выбранных блюд
-function validateOrder() {
-    // Сбор фактически выбранных пользователем блюд
-    const selectedDishNames = [];
-    
-    if (selectedDishes.soup) selectedDishNames.push("Суп");
-    if (selectedDishes.main) selectedDishNames.push("Главное блюдо");
-    if (selectedDishes.salat) selectedDishNames.push("Салат");
-    if (selectedDishes.desserts) selectedDishNames.push("Десерт");
-    if (selectedDishes.drink) selectedDishNames.push("Напиток");
-
-    // Проверка на наличие хотя бы одного блюда
-    if (selectedDishNames.length === 0) {
-        showNotification("Ничего не выбрано. Выберите блюда для заказа");
-        return false;
-    }
-
-    const hasDrink = selectedDishNames.includes("Напиток");
-    const hasSoup = selectedDishNames.includes("Суп");
-    const hasMainDish = selectedDishNames.includes("Главное блюдо");
-    const hasSalad = selectedDishNames.includes("Салат");
-
-    // Проверки для корректного выбора
-    if (!hasDrink) {
-        showNotification("Выберите напиток");
-    } else if (hasSoup && !(hasMainDish || hasSalad)) {
-        showNotification("Выберите главное блюдо/салат");
-    } else if (hasSalad && !(hasMainDish || hasSoup)) {
-        showNotification("Выберите суп и/или главное блюдо");
-    } else if (!hasMainDish && (hasDrink || selectedDishNames.includes("Десерт")) && !hasSoup) {
-        showNotification("Выберите главное блюдо");
-    } else {
-        window.location.href = "zakaz.html";
-        return false; // Позволяет отправку формы, если все проверки пройдены
-    }
-
-    return false; // Предотвращает отправку формы, если не все условия соблюдены
-}
-// Проверка, соответствует ли набор блюд одному из комбо
-function isValidCombo(selectedDishes) {
-    return validCombos.some(combo => combo.every(dish => selectedDishes.includes(dish)) && selectedDishes.length === combo.length);
-}
 function validateOrder1() {
     // Сбор фактически выбранных пользователем блюд
     const selectedDishNames = [];
@@ -383,6 +308,12 @@ function validateOrder1() {
 
     return false; // Предотвращает отправку формы, если не все условия соблюдены
 }
+
+// Проверка, соответствует ли набор блюд одному из комбо
+function isValidCombo(selectedDishes) {
+    return validCombos.some(combo => combo.every(dish => selectedDishes.includes(dish)) && selectedDishes.length === combo.length);
+}
+
 // Показ уведомления
 function showNotification(message) {
     document.getElementById("notification-text").textContent = message;
@@ -393,3 +324,4 @@ function showNotification(message) {
 function closeNotification() {
     document.getElementById("notification").style.display = "none";
 }
+

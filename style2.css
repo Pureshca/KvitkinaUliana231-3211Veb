@@ -488,6 +488,40 @@ button[type="order-button"]:disabled {
           color: tomato;
       }
 
-      .hidden {
+    .hidden {
         display: none;
     }
+.order-panel {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+.order-panel .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.order-panel a {
+    padding: 10px 15px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+}
+
+.order-panel a:hover:not(.disabled) {
+    background: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
