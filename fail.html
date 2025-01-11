@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex - Доставка Вкусной Еды</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Neucha', sans-serif;
+        }
+
+        .hero-section {
+            background: url('hero-image.jpg') no-repeat center center/cover;
+            color: #000;
+            text-align: center;
+            padding: 100px 15px;
+        }
+        .feature-icon {
+            font-size: 40px;
+            color: #42579c;
+        }
+        .cta-section {
+            background-color: #42579c;
+            color: #000;
+            text-align: center;
+            padding: 50px 15px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .btn-success {
+            background-color: #42579c !important; /* Новый цвет фона */
+            border-color: #42579c !important; /* Новый цвет рамки */
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header class="py-3 bg-light border-bottom">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="h4 mb-0">Vortex</h1>
+        <a href="#contact" class="btn btn-outline-primary">Контакты</a>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<header class="hero-section d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4 fw-bold">Vortex - Доставка вкусных бизнес-ланчей</h1>
+    <p class="lead">Свежие и полезные блюда прямо к вашему офису или дому.</p>
+    <img src="image.jpg" class="img-fluid mb-4" alt="Изображение еды" style="width: 60%; display: block; margin: 0 auto;">
+    <a href="#features" class="btn btn-success btn-lg mt-3">Узнать больше</a>
+</header>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Наши Преимущества</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h4>Быстрая доставка</h4>
+                <p>Доставляем ваш заказ вовремя, чтобы вы могли насладиться горячими блюдами.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>Вкусная еда</h4>
+                <p>Используем только свежие ингредиенты для приготовления наших блюд.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>Удобная оплата</h4>
+                <p>Принимаем оплату удобными способами: картой, наличными или онлайн.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section">
+    <h2>Готовы сделать заказ?</h2>
+    <p>Перейдите на страницу "Собрать ланч" и создайте свой идеальный обед.</p>
+    <a href="Lanch.html" class="btn btn-light btn-lg mt-3">Собрать ланч</a>
+</section>
+
+<!-- Contact Form Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Свяжитесь с нами</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ваше имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Введите ваше имя" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Ваш Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Введите ваш email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Ваше сообщение</label>
+                        <textarea class="form-control" id="message" rows="4" placeholder="Введите ваше сообщение" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h4>Контактная информация</h4>
+                <p><strong>Адрес:</strong> г. Москва, ул. Помогите д.13</p>
+                <p><strong>Телефон:</strong> +7 (123) 456-78-90</p>
+                <p><strong>Email:</strong> info@example.com</p>
+                <p>Мы всегда на связи и готовы ответить на ваши вопросы!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer" href="#contact">
+    <div class="container">
+        <p>Адрес: г. Москва, ул. Помогите д.13</p>
+        <p>Телефон: +7 (123) 456-78-90</p>
+        <p>Email: info@example.com</p>
+        <p>&copy; 2024 Vortex - Доставка Вкусной Еды. Все права защищены.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

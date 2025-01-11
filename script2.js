@@ -8,20 +8,37 @@ function displayOrders() {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
     if (orders.length === 0) {
-        ordersList.innerHTML = '<p>Нет заказов.</p>';
+        ordersList.innerHTML = '<tr><td colspan="6">Нет заказов.</td></tr>';
         return;
     }
+
+    
 
     // Очистка списка перед добавлением новых заказов
     ordersList.innerHTML = '';
 
-    // Проходим по каждому заказу и создаем элементы списка
+    // Добавление заголовка таблицы
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = `
+        <th>Номер</th>
+        <th>Дата оформления</th>
+        <th>Состав заказа</th>
+        <th>Стоимость</th>
+        <th>Время доставки</th>
+        <th>Действия</th>
+    `;
+    ordersList.appendChild(headerRow);
+
+    // Проходим по каждому заказу и создаем строки таблицы
     orders.forEach((order, index) => {
         const orderDiv = document.createElement('div');
         orderDiv.classList.add('order-item');
 
         const orderDate = new Date(order.date);
         const formattedDate = orderDate.toLocaleString();
+
+        const deliveryTime = order.formData.delivery_time || 'Как можно скорее';
+        const totalCostText = calculateTotalCost(order.dishes);
 
         // Формируем список названий блюд
         const dishes = order.dishes;
@@ -37,37 +54,37 @@ function displayOrders() {
             }
         }
 
-        const deliveryTime = order.formData.delivery_time || 'Как можно скорее';
+        const row = document.createElement('tr');
 
-
-        const totalCostText = totalCost > 0 ? `${totalCost} ₽` : 'Не указана';
-
-        orderDiv.innerHTML = `
-            <h3>Заказ №${index + 1}</h3>
-            <p>Дата: ${formattedDate}</p>
-            <p>Состав: ${dishNames.length > 0 ? dishNames.join(', ') : 'Не указаны блюда'}</p>
-            <p>Стоимость: ${totalCostText}</p>
-            <p>Время доставки: ${deliveryTime}</p>
-            <button class="details-btn" onclick="showOrderDetails(${index})">Подробнее</button>
-            <button class="edit-btn" onclick="editOrder(${index})">Редактировать</button>
-            <button class="delete-btn" onclick="confirmDeleteOrder(${index})">Удалить</button>
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${formattedDate}</td>
+            <td>Состав: ${dishNames.length > 0 ? dishNames.join(', ') : 'Не указаны блюда'}</td>
+            <td>${totalCostText}</td>
+            <td>${deliveryTime}</td>
+            <td>
+                <button class="details-btn" onclick="showOrderDetails(${index})" title="Посмотреть">👁</button>
+                <button class="edit-btn" onclick="editOrder(${index})" title="Редактировать">✏️</button>
+                <button class="delete-btn" onclick="confirmDeleteOrder(${index})" title="Удалить">🗑️</button>
+            </td>
         `;
 
-        ordersList.appendChild(orderDiv);
-        console.log("Данные формы заказа:", totalCostText);
+        ordersList.appendChild(row);
     });
 }
 
 function showOrderDetails(index) {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const order = orders[index];
-    
-    const totalCostText = calculateTotalCost(order.dishes); // Добавьте расчет стоимости
+    const orderDate = new Date(order.date);
+    const formattedDate = orderDate.toLocaleString(); 
+    const totalCostText = calculateTotalCost(order.dishes);
 
-    // Отладочное сообщение для проверки структуры данных
-    console.log("Показать детали заказа:", order); 
-
-    const modal = createModal('Детали заказа', generateOrderDetailsContent(order, totalCostText), [{ label: 'Ок', onClick: closeModal }]);
+    const modal = createModal(
+        'Детали заказа', 
+        generateOrderDetailsContent(order, totalCostText, formattedDate),
+        [{ label: 'Ок', onClick: closeModal }]
+    );
     document.body.appendChild(modal);
 }
 
@@ -81,41 +98,66 @@ function calculateTotalCost(dishes) {
     return totalCost > 0 ? `${totalCost} ₽` : 'Не указана';
 }
 
-function generateOrderDetailsContent(order, totalCostText) {
-    console.log("Данные формы заказа:", order.formData);
-    console.log("Данные формы заказа:", totalCostText);
+function generateOrderDetailsContent(order, totalCostText, formattedDate) {
+    const selectedDishes = order.dishes || {};
+    const soupOrder = selectedDishes.soup ? `${selectedDishes.soup.name} ${selectedDishes.soup.price} ₽` : "Не выбрано";
+    const mainOrder = selectedDishes.main ? `${selectedDishes.main.name} ${selectedDishes.main.price} ₽` : "Не выбрано";
+    const dessertsOrder = selectedDishes.desserts ? `${selectedDishes.desserts.name} ${selectedDishes.desserts.price} ₽` : "Не выбрано";
+    const salatOrder = selectedDishes.salat ? `${selectedDishes.salat.name} ${selectedDishes.salat.price} ₽` : "Не выбрано";
+    const drinkOrder = selectedDishes.drink ? `${selectedDishes.drink.name} ${selectedDishes.drink.price} ₽` : "Не выбрано";
 
     return `
+        <p>Время оформления: ${formattedDate || 'Не указано'}</p>
+        <h3>Доставка</h3>
         <p>Полное имя: ${order.formData.name || 'Не указано'}</p>
-        <p>Email: ${order.formData.email || 'Не указано'}</p>
-        <p>Телефон: ${order.formData.phone || 'Не указано'}</p>
         <p>Адрес доставки: ${order.formData.address || 'Не указан'}</p>
         <p>Время доставки: ${order.formData.delivery_time || 'Как можно скорее'}</p>
+        <p>Email: ${order.formData.email || 'Не указано'}</p>
+        <p>Телефон: ${order.formData.phone || 'Не указано'}</p>
+        <h3>Комментарий</h3>
         <p>Комментарий: ${order.formData.comments || 'Не указан'}</p>
-        <p>Стоимость: ${totalCostText || 'Не указана'}</p>
+        <h3>Состав заказа</h3>
+        <div id="general-status">
+            <p><strong>Суп</strong></p>
+            <p id="soup-order">${soupOrder}</p> 
+            <p><strong>Главное блюдо</strong></p>
+            <p id="main-order">${mainOrder}</p>
+            <p><strong>Салаты и стартеры</strong></p>
+            <p id="salat-order">${salatOrder}</p> 
+            <p><strong>Десерты</strong></p>
+            <p id="desserts-order">${dessertsOrder}</p> 
+            <p><strong>Напиток</strong></p>
+            <p id="drink-order">${drinkOrder}</p> 
+        </div>
+        <h3>Стоимость: ${totalCostText || 'Не указана'}</h3>
     `;
 }
+
 
 
 // Функция для редактирования заказа
 function editOrder(index) {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const order = orders[index];
-    const modal = createModal('Редактирование заказа', generateOrderEditForm(order), [
+    const formattedDate = order.date ? new Date(order.date).toLocaleString() : 'Не указано';
+    const modal = createModal('Редактирование заказа', generateOrderEditForm(order, formattedDate), [
         { label: 'Сохранить', onClick: () => saveOrderChanges(index) },
         { label: 'Отмена', onClick: closeModal }
     ]);
     document.body.appendChild(modal);
 }
 
-function generateOrderEditForm(order) {
+
+function generateOrderEditForm(order, formattedDate) {
     return `
+        <p>Время оформления: ${formattedDate || 'Не указано'}</p>
+        <h3>Доставка</h3>
         <label>Полное имя</label><input type="text" id="name" value="${order.formData.name || ''}">
-        <label>Email</label><input type="email" id="email" value="${order.formData.email || ''}">
-        <label>Телефон</label><input type="text" id="phone" value="${order.formData.phone || ''}">
         <label>Адрес доставки</label><input type="text" id="delivery_address" value="${order.formData.address || ''}">
-        <label>Время доставки</label><input type="text" id="delivery_time" value="${order.formData.delivery_time || ''}">
-        <label>Комментарий</label><textarea id="comment">${order.formData.comments || ''}</textarea>
+        <label>Время доставки</label><input type="text" id="delivery_time" value="${order.formData.delivery_time || 'Как можно скорее'}">
+        <label>Телефон</label><input type="text" id="phone" value="${order.formData.phone || ''}">
+        <label>Email</label><input type="email" id="email" value="${order.formData.email || ''}">
+        <h3>Комментарий</h3><textarea id="comment">${order.formData.comments || ''}</textarea>
         
     `;
 }
@@ -129,12 +171,12 @@ function saveOrderChanges(index) {
     const updatedOrder = {
         ...order,
         formData: {
-            name: document.getElementById('name').value,  // Исправлено имя поля
+            name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
-            address: document.getElementById('delivery_address').value, // Исправлено имя поля
+            address: document.getElementById('delivery_address').value,
             delivery_time: document.getElementById('delivery_time').value,
-            comments: document.getElementById('comment').value, // Исправлено имя поля
+            comments: document.getElementById('comment').value,
         }
     };
 
@@ -153,10 +195,6 @@ function saveOrderChanges(index) {
     // Оповещаем пользователя
     alert('Изменения сохранены');
 }
-
-
-// Функции для создания и закрытия модальных окон остаются без изменений
-
 
 
 function createModal(title, content, buttons) {

@@ -29,8 +29,14 @@ body {
     margin: 0 auto; /* Автоматические поля слева и справа */
     padding: 40px; /* Увеличенные внутренние отступы */
     background-color: #fff; /* Фон для содержания */
+    display: flex; /* Создаем гибкую структуру */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    min-height: 100vh; /* Минимальная высота равна высоте вьюпорта */
 }
-
+  
+  footer {
+    margin-top: auto; /* Здесь вступает в действие магия Flexbox */
+  }
 /* Шапка сайта */
 header {
     background-color: #333;
@@ -193,25 +199,30 @@ ul {
     padding-left: 20px;
 }
 
-/* Таблица с блюдами */
 table {
-    width: 70%;
+    width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    margin-top: 20px;
 }
 
 th, td {
+    border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 th {
     background-color: #f4f4f4;
+    font-weight: bold;
 }
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 
 /* Футер */
 footer {
@@ -231,112 +242,6 @@ footer a {
 footer a:hover {
     color: rgb(154, 66, 158);
     text-decoration: underline;
-}
-
-/* Стили для меню заказов на дом*/
-.menu-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 10px;
-}
-
-.menu-item {
-display: flex;
-flex-direction: column;
-padding: 30px 40px;
-border-radius: 35px;
-background-color: #fff;
-cursor: pointer;
-filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
-justify-content: space-between; /* Центрирует элементы внутри */
-height: 100%; /* Устанавливаем одинаковую высоту */
-}
-
-.menu-item button {
-background-color: #f1eee9;
-color: #333;
-padding: 10px 0; /* Вертикальные отступы */
-width: 100%; /* Растягиваем кнопку на всю ширину контейнера */
-border-radius: 10px;
-margin-top: auto; /* Это обеспечит выравнивание кнопки внизу */
-text-align: center; /* Выравнивание текста по центру */
-cursor: pointer;
-transition: background-color 0.3s, color 0.3s;
-border: none;
-font-size: 1rem; /* Размер шрифта для кнопки */
-}
-
-
-.menu-item:hover {
-border: 2px solid tomato;
-}
-
-.menu-item:hover button {
-background-color: tomato;
-color: #fff;
-}
-
-
-/* Стили для изображения */
-section > div > div > img {
-width: 100%;
-height: auto;
-border-radius: 35px;
-transition: transform 0.3s ease;
-}
-
-section > div > div > img:hover {
-transform: scale(1.1);
-}
-
-/* Стили для цены */
-section > div > div > p.price {
-font-size: 1.1rem;
-transition: font-size 0.3s ease;
-}
-
-section > div > div > p.price:hover {
-font-size: 1.2rem;
-}
-
-/* Стили для названия блюда */
-section > div > div > p.dish-name {
-font-size: 1.1rem;
-transition: font-size 0.3s ease;
-}
-
-section > div > div > p.dish-name:hover {
-font-size: 1.2rem;
-}
-
-/* Стили для веса/объема */
-section > div > div > p.weight {
-color: #808080;
-transition: color 0.3s ease;
-}
-
-section > div > div > p.weight:hover {
-color: #505050;
-}
-
-
-.menu-item .add-button {
-background-color: #f1eee9;
-color: #333;
-padding: 10px 0; /* Вертикальные отступы */
-width: 100%; /* Растягиваем кнопку на всю ширину контейнера */
-border-radius: 10px;
-margin-top: 20px;
-text-align: center; /* Выравнивание текста по центру */
-cursor: pointer;
-transition: background-color 0.3s, color 0.3s;
-border: none;
-font-size: 1rem; /* Размер шрифта для кнопки */
-}
-
-.menu-item:hover .add-button {
-background-color: tomato;
-color: #fff;
 }
 
 
@@ -556,7 +461,6 @@ font-size: 13px;
 .dish img:hover {
   transform: translateY(-5px) scale(1.1);
 }
-
 
 /* Уведомление */
 .notification {
