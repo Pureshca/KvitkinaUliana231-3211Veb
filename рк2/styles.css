@@ -1,0 +1,422 @@
+html, body {
+    margin: 0;
+    font-family: 'Neucha', sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    scroll-behavior: smooth;
+}
+
+body {
+    flex-grow: 1;
+    padding-bottom: 20px;
+}
+
+header {
+    background-color: #161b22;
+    color: #58a6ff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    width: 60px;
+    height: auto;
+    cursor: pointer;
+}
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a.active, 
+nav ul li a:hover {
+    background-color: #8b5cf6;
+    color: #ffffff;
+}
+
+main {
+    flex-grow: 1;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #161b22;
+    color: #58a6ff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product {
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.product p {
+    margin: 10px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 60px;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #161b22;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    color: #c9d1d9;
+    border-radius: 10px;
+}
+
+.modal-image {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.modal-description {
+    width: 55%;
+    padding-left: 20px;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.modal-description h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #58a6ff;
+}
+
+.modal-description p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #8b949e;
+    margin-bottom: 20px;
+}
+
+.close-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #ff7b72;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.close-back:hover,
+.close-back:focus {
+    color: #8b5cf6;
+}
+
+/* Стилизация кнопки "Добавить в корзину" */
+.add-to-cart-btn {
+    background-color: #8b5cf6;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #6d28d9;
+}
+
+a {
+    color: #58a6ff;
+}
+
+a:hover {
+    color: #8b5cf6;
+}
+
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    background-color: #21262d;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item p {
+    margin: 0;
+}
+
+.cart-item .quantity-input {
+    width: 50px;
+    padding: 5px;
+    margin-left: 10px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+}
+
+.cart-item .price {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #8b5cf6;
+}
+
+.cart-item button {
+    background-color: #58a6ff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cart-item button:hover {
+    background-color: #6d28d9;
+}
+
+
+.remove-item-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.remove-item-btn:hover {
+    background-color: darkred;
+}
+
+/* Стили для контейнера с изображениями */
+#prediction-image-container {
+    margin-top: 20px;
+    text-align: center;
+    display: none; /* Скрываем картинку по умолчанию */
+}
+
+#prediction-image {
+    width: 500px; /* Фиксированная ширина изображения */
+    height: 400px; /* Фиксированная высота изображения */
+    object-fit: contain; /* Сохраняет пропорции изображения без обрезки */
+    background-color: #000000; /* Фоновый цвет, если изображение меньше по размеру */
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.shop-image {
+    max-width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Общие стили для секции формы обратной связи */
+#feedback-section {
+    background-color: #24252a;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 24px auto;
+    max-width: 640px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+#feedback-section h2 {
+    font-size: 26px;
+    color: #f0f0f5;
+    margin-bottom: 24px;
+}
+
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#feedback-message {
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: #1e1f24;
+    color: #dcdce1;
+    resize: vertical;
+}
+
+#feedback-form button {
+    padding: 14px 22px;
+    background-color: #58a6ff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#feedback-form button:hover {
+    background-color: #6d28d9;
+    transform: scale(1.05);
+}
+
+#feedback-form button:active {
+    background-color: #6d28d9;
+    transform: scale(0.95);
+}
+
+#feedback-form button:focus {
+    outline: 2px solid #ff9f9f;
+    outline-offset: 4px;
+}
+
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #feedback-section {
+        padding: 20px;
+    }
+}
+
+/* Адаптивность: форма будет корректно отображаться на мобильных устройствах */
+@media (max-width: 768px) {
+    #feedback-section {
+        padding: 15px;
+    }
+
+    #feedback-message {
+        min-height: 100px;
+    }
+
+    #feedback-form button {
+        font-size: 14px;
+    }
+}
+button {
+    font-family: 'Neucha', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #8b5cf6;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #6d28d9;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #4c1d95;
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: 2px solid #caa1c4;
+    outline-offset: 4px;
+}
+p1 {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: justify;
+    color: #caa1c4;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-indent: 30px;
+}
+
+p1:last-child {
+    margin-bottom: 0;
+}

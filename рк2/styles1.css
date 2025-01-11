@@ -1,0 +1,196 @@
+html, body {
+    margin: 0;
+    font-family: 'Neucha', sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    scroll-behavior: smooth;
+}
+
+body {
+    flex-grow: 1;
+    padding-bottom: 20px;
+}
+
+header {
+    background-color: #161b22;
+    color: #58a6ff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    width: 60px;
+    height: auto;
+    cursor: pointer;
+}
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a.active, 
+nav ul li a:hover {
+    background-color: #8b5cf6;
+    color: #ffffff;
+}
+
+main {
+    flex-grow: 1;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #161b22;
+    color: #58a6ff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+/* Плавное переключение слайдов */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mySlides img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade {
+    animation: fadeEffect 6s ease-in-out forwards;
+}
+
+@keyframes fadeEffect {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+a {
+    color: #9b4d96;
+}
+
+a:hover {
+    color: #6b2a64;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+.auth-form {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+.auth-form label {
+    display: block;
+    font-weight: bold;
+    color: #a9a9a9;
+    margin-bottom: 10px;
+}
+
+.auth-form input {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #121212;
+    color: #fff;
+}
+
+.auth-form button {
+    background-color: #9b4d96;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+.auth-form button:hover {
+    background-color: #7a2c6f;
+}
+
+.auth-form p {
+    text-align: center;
+    font-size: 14px;
+    color: #bbb;
+}
+
+#logout-btn {
+    background-color: #6a1b9a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 30px auto;
+}
+
+#logout-btn:hover {
+    background-color: #4a148c;
+}

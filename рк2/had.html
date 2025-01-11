@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ведьма - Предсказания</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Логотип" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="shop.html">Магазин</a></li>
+                <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
+                <li><a href="had.html" class="active">Предсказание</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="auth.html" id="auth-link"> Войти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Предсказание на сегодня</h1>
+            <p id="prediction-text"></p>
+            <div id="prediction-image-container">
+                <img id="prediction-image" src="" alt="Изображение предсказания" />
+            </div>
+            <button onclick="generatePrediction()">Получить предсказание</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>г.Москва, ул.Шиза, д.13</p>
+        <p>email@domain.com</p>
+        <p>+79666666666</p>
+        <p>© 2025 Таролочка</p>
+    </footer>
+
+    <script>
+        const predictions = [
+            { text: "Вас ждёт удача в ближайшие дни.", image: "luck.jpg" },
+            { text: "Сегодня отличный день для начинаний!", image: "start.jpg" },
+            { text: "Осторожно, вам предстоит важное решение.", image: "decision.jpg" },
+            { text: "Ваша энергия сегодня на высоте, используйте её с умом.", image: "energy.jpg" },
+            { text: "Вы скоро встретите кого-то, кто изменит вашу жизнь.", image: "meeting.jpg" },
+            { text: "Время для перемен — не бойтесь рисковать.", image: "change.jpg" },
+            { text: "Скоро в вашей жизни появится нечто важное и неожиданное.", image: "surprise.jpg" },
+            { text: "Ожидайте удивительных новостей в ближайшее время.", image: "news.jpg" },
+            { text: "Будьте открыты для новых возможностей, они уже рядом.", image: "opportunity.webp" },
+            { text: "Ваша интуиция подскажет правильный путь.", image: "intuition.jpg" }
+        ];
+
+        function generatePrediction() {
+            const randomIndex = Math.floor(Math.random() * predictions.length);
+            const prediction = predictions[randomIndex];
+
+            document.getElementById("prediction-text").textContent = prediction.text;
+
+            const predictionImage = document.getElementById("prediction-image");
+            predictionImage.src = prediction.image;
+
+            // Убедитесь, что изображение отображается
+            document.getElementById("prediction-image-container").style.display = "block";
+        }
+    </script>
+<script src="scripts.js"></script>
+</body>
+</html>

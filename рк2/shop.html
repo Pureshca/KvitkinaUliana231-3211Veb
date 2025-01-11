@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ведьма</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Логотип" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="shop.html" class="active">Магазин</a></li>
+                <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
+                <li><a href="had.html">Предсказание</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="auth.html" id="auth-link"> Войти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Наши товары</h1>
+            <div id="product-list">
+                <!-- Продукты будут добавляться сюда динамически -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для подробной информации -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <img id="modal-image" src="" alt="Продукт" class="modal-image">
+            <div class="modal-description">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description-text"></p>
+                <p><strong>Цена:</strong> <span id="modal-price"></span> руб.</p>
+                <p><strong>Количество в наличии:</strong> <span id="modal-quantity"></span></p>
+                <button id="add-to-cart-btn" class="add-to-cart-btn">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>г.Москва, ул.Шиза, д.13</p>
+        <p>email@domain.com</p>
+        <p>+79666666666</p>
+        <p>© 2025 Таролочка</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
